@@ -5,19 +5,22 @@ import { Colors, Spacing } from '../styles/globalStyles';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { AppContext } from '../context/AppContext';
-import { FiMail } from 'react-icons/fi';
 
 const LoginContainer = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1a0a2e 0%, #2d1b3d 50%, #1a0a2e 100%);
+  background-image: url('/Backgroundlogin.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
 const LoginCard = styled.div`
-  background-color: rgba(45, 27, 61, 0.8);
+  background: linear-gradient(180deg, rgba(98, 62, 98, 0.5) 0%, rgba(52, 32, 50, 0.7) 100%);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   padding: ${Spacing.xl};
@@ -26,12 +29,21 @@ const LoginCard = styled.div`
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 `;
 
-const Logo = styled.h1`
-  font-size: 48px;
-  text-align: center;
-  margin-bottom: ${Spacing.xl};
-  color: ${Colors.lightText};
-  font-weight: 800;
+const LogoImage = styled.img`
+  height: 80px;
+  width: 100%;
+  object-fit: contain;
+  margin-bottom: ${Spacing.lg};
+  display: block;
+`;
+
+const GoogleSignInImage = styled.img`
+  height: 56px;
+  width: 100%;
+  object-fit: contain;
+  cursor: not-allowed;
+  opacity: 1;
+  display: block;
 `;
 
 const Title = styled.h2`
@@ -44,12 +56,12 @@ const Title = styled.h2`
 
 const SignUpLink = styled.p`
   text-align: center;
-  color: ${Colors.mutedText};
+  color: #ffffff;
   font-size: 14px;
   margin-top: ${Spacing.lg};
 
   a {
-    color: ${Colors.primary};
+    color: ${Colors.mutedText};
     text-decoration: none;
     cursor: pointer;
 
@@ -83,18 +95,18 @@ const Divider = styled.div`
   }
 `;
 
-const GoogleButton = styled(Button)`
+const GoogleButtonContainer = styled.div`
+  width: 100%;
+  margin-bottom: ${Spacing.md};
+`;
+
+const DisabledContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: ${Spacing.md};
-  background-color: ${Colors.lightText};
-  color: ${Colors.darkBg};
   margin-bottom: ${Spacing.lg};
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
+  cursor: not-allowed;
+  pointer-events: none;
 `;
 
 const ErrorMessage = styled.p`
@@ -154,14 +166,10 @@ const Login = () => {
     }, 500);
   };
 
-  const handleGoogleLogin = () => {
-    navigate('/signup');
-  };
-
   return (
     <LoginContainer>
+      <LogoImage src="/Pulse.jpg" alt="Pulse Logo" />
       <LoginCard>
-        <Logo>Pulse</Logo>
         <Title>LOG IN</Title>
 
         {loginError && <ErrorMessage>{loginError}</ErrorMessage>}
@@ -203,16 +211,12 @@ const Login = () => {
 
         <Divider>or continue with</Divider>
 
-        <GoogleButton
-          onClick={handleGoogleLogin}
-          fullWidth
-        >
-          <FiMail size={20} />
-          Create New Account
-        </GoogleButton>
+        <GoogleButtonContainer>
+          <GoogleSignInImage src="/googlesignin.jpg" alt="Google Sign In" />
+        </GoogleButtonContainer>
 
         <SignUpLink>
-          Don't have an account? <a onClick={() => navigate('/signup')}>Sign up</a>
+          Don't have an account? <a href="/signup">Sign up</a>
         </SignUpLink>
       </LoginCard>
     </LoginContainer>

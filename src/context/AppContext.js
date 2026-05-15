@@ -11,6 +11,9 @@ export const AppProvider = ({ children }) => {
   const [userFriends, setUserFriends] = useState([]);
   const [userArtists, setUserArtists] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
+  const [navigationHistory, setNavigationHistory] = useState([]);
+  const [currentHistoryIndex, setCurrentHistoryIndex] = useState(-1);
+  const [isNavigatingFromHistory, setIsNavigatingFromHistory] = useState(false);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -201,6 +204,48 @@ export const AppProvider = ({ children }) => {
     ));
   };
 
+  const addToNavigationHistory = (pathname) => {
+    // Don't add to history if we're navigating from the back/forward buttons
+    if (isNavigatingFromHistory) {
+      return;
+    }
+    
+    // Only add if it's different from the current page
+    if (navigationHistory[currentHistoryIndex] !== pathname) {
+      // If we're not at the end of history, remove everything after current index
+      const newHistory = navigationHistory.slice(0, currentHistoryIndex + 1);
+      newHistory.push(pathname);
+      setNavigationHistory(newHistory);
+      setCurrentHistoryIndex(newHistory.length - 1);
+    }
+  };
+
+  const goBack = () => {
+    if (currentHistoryIndex > 0) {
+      setIsNavigatingFromHistory(true);
+      setCurrentHistoryIndex(currentHistoryIndex - 1);
+      return navigationHistory[currentHistoryIndex - 1];
+    }
+    return null;
+  };
+
+  const goForward = () => {
+    if (currentHistoryIndex < navigationHistory.length - 1) {
+      setIsNavigatingFromHistory(true);
+      setCurrentHistoryIndex(currentHistoryIndex + 1);
+      return navigationHistory[currentHistoryIndex + 1];
+    }
+    return null;
+  };
+
+  const canGoBack = () => currentHistoryIndex > 0;
+  
+  const canGoForward = () => currentHistoryIndex < navigationHistory.length - 1;
+
+  const isUserMemberOfCommunity = (artistId) => {
+    return userArtists.some(a => a.id === artistId);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -230,7 +275,16 @@ export const AppProvider = ({ children }) => {
         userPosts,
         addPost,
         deletePost,
-        updatePost
+        updatePost,
+        navigationHistory,
+        currentHistoryIndex,
+        addToNavigationHistory,
+        goBack,
+        goForward,
+        canGoBack,
+        canGoForward,
+        setIsNavigatingFromHistory,
+        isUserMemberOfCommunity
       }}
     >
       {children}

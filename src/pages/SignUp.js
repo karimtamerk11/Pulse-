@@ -5,20 +5,24 @@ import { Colors, Spacing } from '../styles/globalStyles';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { AppContext } from '../context/AppContext';
-import { FiMail, FiCheck, FiX } from 'react-icons/fi';
+import { FiCheck, FiX } from 'react-icons/fi';
 
 const SignUpContainer = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1a0a2e 0%, #2d1b3d 50%, #1a0a2e 100%);
+  background-image: url('/Backgroundlogin.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   overflow-y: auto;
 `;
 
 const SignUpCard = styled.div`
-  background-color: rgba(45, 27, 61, 0.8);
+  background: linear-gradient(180deg, rgba(98, 62, 98, 0.5) 0%, rgba(52, 32, 50, 0.7) 100%);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   padding: ${Spacing.xl};
@@ -28,12 +32,25 @@ const SignUpCard = styled.div`
   margin: ${Spacing.lg} 0;
 `;
 
-const Logo = styled.h1`
-  font-size: 48px;
-  text-align: center;
-  margin-bottom: ${Spacing.xl};
-  color: ${Colors.lightText};
-  font-weight: 800;
+const LogoImage = styled.img`
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: ${Spacing.lg};
+  display: block;
+  flex-shrink: 0;
+`;
+
+const GoogleSignInImage = styled.img`
+  height: 56px;
+  width: 100%;
+  object-fit: contain;
+  cursor: not-allowed;
+  opacity: 1;
+  display: block;
+  flex-shrink: 0;
+  flex-grow: 0;
+  line-height: 0;
 `;
 
 const Title = styled.h2`
@@ -76,29 +93,23 @@ const Divider = styled.div`
   }
 `;
 
-const GoogleButton = styled(Button)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${Spacing.md};
-  background-color: ${Colors.lightText};
-  color: ${Colors.darkBg};
-  margin-bottom: ${Spacing.lg};
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
+const GoogleButtonContainer = styled.div`
+  width: 100%;
+  margin-bottom: ${Spacing.md};
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
 `;
 
 const TermsText = styled.p`
   font-size: 12px;
-  color: ${Colors.mutedText};
+  color: #ffffff;
   text-align: center;
   line-height: 1.6;
   margin-top: ${Spacing.lg};
 
   a {
-    color: ${Colors.primary};
+    color: ${Colors.mutedText};
     text-decoration: none;
 
     &:hover {
@@ -109,18 +120,23 @@ const TermsText = styled.p`
 
 const LoginLink = styled.p`
   text-align: center;
-  color: ${Colors.mutedText};
+  color: #ffffff;
   font-size: 14px;
   margin-top: ${Spacing.lg};
+`;
 
-  a {
-    color: ${Colors.primary};
-    text-decoration: none;
-    cursor: pointer;
+const StyledLoginLink = styled.button`
+  background: none;
+  border: none;
+  color: ${Colors.mutedText};
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+  text-decoration: none;
+  transition: text-decoration 0.3s ease;
 
-    &:hover {
-      text-decoration: underline;
-    }
+  &:hover {
+    text-decoration: underline;
   }
 `;
 
@@ -252,8 +268,8 @@ const SignUp = () => {
 
   return (
     <SignUpContainer>
+      <LogoImage src="/Pulse.jpg" alt="Pulse Logo" />
       <SignUpCard>
-        <Logo>Pulse</Logo>
         <Title>CREATE AN ACCOUNT</Title>
         <DescriptionText>Find underground artists in your city and connect with like-minded listeners.</DescriptionText>
 
@@ -336,20 +352,16 @@ const SignUp = () => {
 
         <Divider>or continue with</Divider>
 
-        <GoogleButton
-          onClick={() => navigate('/login')}
-          fullWidth
-        >
-          <FiMail size={20} />
-          Log In Instead
-        </GoogleButton>
+        <GoogleButtonContainer>
+          <GoogleSignInImage src="/googlesignin.jpg" alt="Google Sign In" />
+        </GoogleButtonContainer>
 
         <TermsText>
-          By clicking continue, you agree to our <button style={{background: 'none', border: 'none', color: Colors.primary, cursor: 'pointer', textDecoration: 'none', padding: 0}}>Terms of Service</button> and <button style={{background: 'none', border: 'none', color: Colors.primary, cursor: 'pointer', textDecoration: 'none', padding: 0}}>Privacy Policy</button>
+          By clicking continue, you agree to our <button style={{background: 'none', border: 'none', color: Colors.mutedText, cursor: 'pointer', textDecoration: 'none', padding: 0}}>Terms of Service</button> and <button style={{background: 'none', border: 'none', color: Colors.mutedText, cursor: 'pointer', textDecoration: 'none', padding: 0}}>Privacy Policy</button>
         </TermsText>
 
         <LoginLink>
-          Already have an account? <a onClick={() => navigate('/login')}>Log in</a>
+          Already have an account? <StyledLoginLink onClick={() => navigate('/login')}>Log in</StyledLoginLink>
         </LoginLink>
       </SignUpCard>
     </SignUpContainer>

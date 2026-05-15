@@ -2,20 +2,20 @@ import styled from 'styled-components';
 import { Colors, Spacing } from '../styles/globalStyles';
 
 export const StyledButton = styled.button`
-  background-color: ${props => props.$primary ? Colors.primary : Colors.darkGray};
-  color: ${Colors.lightText};
+  background-color: ${props => props.$primary ? '#ffffff' : Colors.darkGray};
+  color: ${props => props.$primary ? '#000000' : Colors.lightText};
   border: none;
-  padding: ${Spacing.md} ${Spacing.lg};
+  padding: ${Spacing.sm} ${Spacing.md};
   border-radius: 8px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: ${props => props.$primary ? '400' : '600'};
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Almarai', sans-serif;
   width: ${props => props.$fullWidth ? '100%' : 'auto'};
 
   &:hover {
-    background-color: ${props => props.$primary ? Colors.accentPurple : '#444444'};
+    background-color: ${props => props.$primary ? '#f0f0f0' : '#444444'};
     transform: translateY(-2px);
   }
 

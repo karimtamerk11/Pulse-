@@ -12,7 +12,7 @@ export const CardContainer = styled.div`
 
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(123, 44, 191, 0.3);
+    box-shadow: 0 10px 30px rgba(250, 165, 230, 0.3);
   }
 `;
 
@@ -25,10 +25,14 @@ export const CardImage = styled.div`
   justify-content: center;
   font-size: 48px;
   color: ${Colors.mutedText};
+  background-size: cover;
+  background-position: center;
+  background-image: ${props => props.$backgroundImage ? `url(${props.$backgroundImage})` : 'none'};
 `;
 
 export const CardContent = styled.div`
   padding: ${Spacing.md};
+  background: linear-gradient(180deg, rgba(98, 62, 98, 0.5) 0%, rgba(52, 32, 50, 0.7) 100%);
 `;
 
 export const CardTitle = styled.h3`
@@ -47,7 +51,9 @@ export const CardSubtitle = styled.p`
 const Card = ({ title, subtitle, image, minWidth, onClick, height }) => {
   return (
     <CardContainer $minWidth={minWidth} onClick={onClick}>
-      <CardImage $height={height}>🖼️</CardImage>
+      <CardImage $height={height} $backgroundImage={image}>
+        {!image && '🖼️'}
+      </CardImage>
       <CardContent>
         <CardTitle>{title}</CardTitle>
         {subtitle && <CardSubtitle>{subtitle}</CardSubtitle>}

@@ -20,16 +20,16 @@ export const GlobalStyles = createGlobalStyle`
 `;
 
 export const Colors = {
-  primary: '#7b2cbf',
+  primary: '#623e62',
   darkBg: '#1a0a2e',
-  secondaryBg: '#2d1b3d',
+  secondaryBg: '#342032',
   lightText: '#ffffff',
-  mutedText: '#b0b0b0',
-  accentPurple: '#a020f0',
+  mutedText: '#c892cc',
+  accentPurple: '#9c5e9c',
   lightGray: '#e0e0e0',
   darkGray: '#333333',
   errorRed: '#ff6b6b'
-};
+};  
 
 export const Spacing = {
   xs: '4px',

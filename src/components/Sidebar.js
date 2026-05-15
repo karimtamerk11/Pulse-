@@ -7,7 +7,7 @@ import { AppContext } from '../context/AppContext';
 
 export const SidebarContainer = styled.div`
   width: 200px;
-  background-color: ${Colors.darkBg};
+  background-color: #181218;
   padding: ${Spacing.lg};
   display: flex;
   flex-direction: column;
@@ -34,22 +34,32 @@ export const SidebarContainer = styled.div`
 `;
 
 export const Logo = styled(Link)`
-  font-size: 24px;
-  font-weight: 800;
-  color: ${Colors.lightText};
-  margin-bottom: ${Spacing.xl};
-  text-decoration: none;
   display: flex;
   align-items: center;
-  gap: ${Spacing.md};
+  justify-content: center;
+  margin-bottom: ${Spacing.xl};
+  text-decoration: none;
+
+  img {
+    height: 35px;
+    width: auto;
+    object-fit: contain;
+  }
 
   @media (max-width: 768px) {
     justify-content: center;
-    font-size: 20px;
+    
+    img {
+      height: 40px;
+    }
   }
 
   @media (max-width: 480px) {
     margin-bottom: ${Spacing.md};
+    
+    img {
+      height: 40px;
+    }
   }
 `;
 
@@ -181,7 +191,9 @@ const Sidebar = () => {
 
   return (
     <SidebarContainer>
-      <Logo to="/discover">Pulse</Logo>
+      <Logo to="/discover">
+        <img src="/Pulse.jpg" alt="Pulse Logo" />
+      </Logo>
 
       <NavMenu>
         <NavItem to="/discover" $active={isActive('/discover')}>
@@ -198,7 +210,7 @@ const Sidebar = () => {
         <>
           <SectionTitle>Communities</SectionTitle>
           {userArtists.slice(0, 4).map((artist, idx) => (
-            <CommunityItem to={`/artist/${artist.id}`} key={idx}>
+            <CommunityItem to={`/artist-community/${artist.id}`} key={idx}>
               <span className="indicator"></span>
               <span>{artist.name}</span>
             </CommunityItem>

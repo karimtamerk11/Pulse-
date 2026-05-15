@@ -20,7 +20,7 @@ export const StyledInput = styled.input`
   &:focus {
     outline: none;
     background-color: ${Colors.lightText};
-    box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.3);
+    box-shadow: 0 0 0 3px rgba(250, 165, 230, 0.3);
   }
 
   &:disabled {

@@ -7,14 +7,15 @@ import Login from './pages/Login';
 import Discover from './pages/Discover';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
-import Concerts from './pages/Concerts';
 import Tickets from './pages/Tickets';
 import Artists from './pages/Artists';
 import ArtistCommunity from './pages/ArtistCommunity';
 import EditProfile from './pages/EditProfile';
+import { useNavigationTracker } from './hooks/useNavigationTracker';
 
 function AppContent() {
   const { isAuthenticated } = useContext(AppContext);
+  useNavigationTracker();
 
   return (
     <>
@@ -26,7 +27,6 @@ function AppContent() {
         <Route path="/discover" element={isAuthenticated ? <Discover /> : <Navigate to="/login" />} />
         <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login" />} />
         <Route path="/settings" element={isAuthenticated ? <Settings /> : <Navigate to="/login" />} />
-        <Route path="/concerts" element={isAuthenticated ? <Concerts /> : <Navigate to="/login" />} />
         <Route path="/tickets" element={isAuthenticated ? <Tickets /> : <Navigate to="/login" />} />
         <Route path="/artists" element={isAuthenticated ? <Artists /> : <Navigate to="/login" />} />
         <Route path="/artist-community/:artistId" element={isAuthenticated ? <ArtistCommunity /> : <Navigate to="/login" />} />

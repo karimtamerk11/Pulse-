@@ -430,12 +430,19 @@ const Profile = () => {
 
             <SectionBox>
               <SectionTitle>My Communities</SectionTitle>
-              {userArtists && userArtists.length > 0 ? (
+              {currentUser?.publicArtists && userArtists && userArtists.length > 0 ? (
                 <>
                   <ArtistGrid>
                     {userArtists.slice(0, 6).map((artist) => (
-                      <ArtistCard key={artist.id}>
-                        <Avatar size="80px" />
+                      <ArtistCard key={artist.id} onClick={() => navigate(`/artist-community/${artist.id}`)}>
+                        <div style={{
+                          width: '80px',
+                          height: '80px',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          borderRadius: '8px',
+                          backgroundImage: `url("${artist.image}")`
+                        }} />
                         <ArtistLabel>{artist.name || `Community ${artist.id}`}</ArtistLabel>
                       </ArtistCard>
                     ))}
@@ -448,7 +455,7 @@ const Profile = () => {
                 </>
               ) : (
                 <p style={{ fontSize: '14px', color: Colors.mutedText, margin: 0 }}>
-                  No communities yet. Join one to see them here!
+                  {!currentUser?.publicArtists ? 'Communities are hidden. Update settings to display publicly.' : 'No communities yet. Join one to see them here!'}
                 </p>
               )}
             </SectionBox>
